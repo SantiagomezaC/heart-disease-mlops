@@ -203,6 +203,8 @@ Las salidas de cada etapa ejecutada en local (Windows 11, Docker Desktop 29.8, M
 | `04_kubectl_scale.txt` | Escalado a 3 réplicas en ejecución |
 | `05_flake8.txt`, `05_pytest.txt` | Lint sin observaciones y 16 pruebas aprobadas |
 
+La ejecución en la nube de las mismas etapas puede consultarse en la pestaña [Actions](https://github.com/SantiagomezaC/heart-disease-mlops/actions) del repositorio; la imagen publicada por el CI está disponible en [`ghcr.io/santiagomezac/heart-api`](https://github.com/SantiagomezaC/heart-disease-mlops/pkgs/container/heart-api) y puede descargarse con `docker pull ghcr.io/santiagomezac/heart-api:latest`.
+
 ## Decisiones técnicas y adaptaciones al enunciado
 
 | Aspecto | Enunciado | Implementación | Motivo |
@@ -215,7 +217,7 @@ Las salidas de cada etapa ejecutada en local (Windows 11, Docker Desktop 29.8, M
 | Dependencias | Sin versión | Versiones fijadas; `xgboost-cpu` | Reproducibilidad del modelo serializado; imagen sin bibliotecas GPU |
 | Imagen en `deployment.yaml` | `<TU_USUARIO_DOCKER>/heart-api` | `ghcr.io/santiagomezac/heart-api:latest` | El CI publica la imagen en GHCR sin credenciales adicionales |
 | Réplicas | 1 | 2, con sondas y recursos | Disponibilidad y balanceo por el Service |
-| Acciones de GitHub | `checkout@v3`, `setup-python@v4` | `@v4`, `@v5` | Las versiones anteriores dependen de entornos Node obsoletos en los *runners* |
+| Acciones de GitHub | `checkout@v3`, `setup-python@v4` | `@v7` (y `upload-artifact@v7`, `download-artifact@v8`) | Las versiones del enunciado usan Node.js 16/20, obsoletos en los *runners* de GitHub |
 | Pruebas | `pytest tests/` | Igual, más `httpx` para el `TestClient` | Requisito de `fastapi.testclient` |
 | Evidently | `evidently.report` | `evidently==0.6.7` | Última serie con esa API; a partir de 0.7 se movió a `evidently.legacy` |
 

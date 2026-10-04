@@ -10,9 +10,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.10'
           cache: pip
@@ -34,7 +34,7 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Build image
         run: docker build -t heart-api -f docker/Dockerfile .
       - name: Smoke test
@@ -50,7 +50,7 @@ jobs:
         run: |
           docker tag heart-api ${{ env.IMAGE }}:latest
           docker save ${{ env.IMAGE }}:latest -o heart-api.tar
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: heart-api-image
           path: heart-api.tar
@@ -68,8 +68,8 @@ jobs:
     needs: docker
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
         with:
           name: heart-api-image
       - name: Create kind cluster
@@ -96,15 +96,15 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.10'
       - name: Install monitoring dependencies
         run: pip install -r monitoring/requirements.txt
       - name: Generate drift reports
         run: python monitoring/drift_report.py
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: drift-reports
           path: |
