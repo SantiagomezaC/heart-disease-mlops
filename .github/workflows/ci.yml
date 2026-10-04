@@ -1,0 +1,113 @@
+name: CI
+
+on: [push, pull_request, workflow_dispatch]
+
+env:
+  IMAGE: ghcr.io/santiagomezac/heart-api
+
+jobs:
+  # Etapa 5 — linting y pruebas automáticas en cada push
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: pip
+          cache-dependency-path: docker/requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install -r docker/requirements.txt
+          pip install flake8 pytest httpx
+      - name: Lint
+        run: flake8 app/ tests/
+      - name: Tests
+        run: pytest tests/ -v
+
+  # Etapa 3 en CI — construcción de la imagen y prueba de humo del contenedor
+  docker:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image
+        run: docker build -t heart-api -f docker/Dockerfile .
+      - name: Smoke test
+        run: |
+          docker run -d --name heart -p 8000:8000 heart-api
+          for i in $(seq 1 30); do curl -sf localhost:8000/health && break; sleep 1; done
+          curl -sf -X POST localhost:8000/predict \
+            -H "Content-Type: application/json" \
+            -d '{"features":[54,"M","ASY",140,239,0,"Normal",160,"N",1.2,"Flat"]}' | tee response.json
+          python3 -c "import json; r = json.load(open('response.json')); assert 0 <= r['heart_disease_probability'] <= 1"
+          docker rm -f heart
+      - name: Save image
+        run: |
+          docker tag heart-api ${{ env.IMAGE }}:latest
+          docker save ${{ env.IMAGE }}:latest -o heart-api.tar
+      - uses: actions/upload-artifact@v4
+        with:
+          name: heart-api-image
+          path: heart-api.tar
+          retention-days: 3
+      - name: Push to GHCR
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker tag heart-api ${{ env.IMAGE }}:${{ github.sha }}
+          docker push ${{ env.IMAGE }}:latest
+          docker push ${{ env.IMAGE }}:${{ github.sha }}
+
+  # Etapa 4 en CI — despliegue de los manifiestos en un clúster efímero (kind)
+  kubernetes:
+    needs: docker
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: heart-api-image
+      - name: Create kind cluster
+        uses: helm/kind-action@v1
+        with:
+          cluster_name: heart
+      - name: Load image and deploy
+        run: |
+          kind load image-archive heart-api.tar --name heart
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
+          kubectl rollout status deployment/heart-model --timeout=180s
+          kubectl get pods,svc -o wide
+      - name: Test service
+        run: |
+          kubectl port-forward svc/heart-service 8080:80 &
+          for i in $(seq 1 30); do curl -sf localhost:8080/health && break; sleep 1; done
+          curl -sf -X POST localhost:8080/predict \
+            -H "Content-Type: application/json" \
+            -d '{"features":[65,"M","ASY",150,0,1,"ST",100,"Y",2.5,"Flat"]}'
+
+  # Etapa 6 en CI — reporte de deriva de datos con Evidently
+  drift:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - name: Install monitoring dependencies
+        run: pip install -r monitoring/requirements.txt
+      - name: Generate drift reports
+        run: python monitoring/drift_report.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: drift-reports
+          path: |
+            drift_report.html
+            reports/drift_report_simulated.html
+            reports/drift_summary.json

@@ -1,0 +1,15 @@
+# Etapa 4 — Service que expone el Deployment en el puerto 80.
+# En Minikube, una IP externa para el LoadBalancer requiere `minikube tunnel`;
+# alternativamente: `minikube service heart-service --url`.
+apiVersion: v1
+kind: Service
+metadata:
+  name: heart-service
+spec:
+  selector:
+    app: heart-model
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: LoadBalancer

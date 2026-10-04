@@ -1,0 +1,45 @@
+# Etapa 4 — Deployment del servicio de inferencia.
+# La imagen se publica en GitHub Container Registry desde el workflow de CI.
+# En Minikube puede usarse también la imagen construida localmente:
+#   minikube image load ghcr.io/santiagomezac/heart-api:latest
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heart-model
+  labels:
+    app: heart-model
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: heart-model
+  template:
+    metadata:
+      labels:
+        app: heart-model
+    spec:
+      containers:
+      - name: model
+        image: ghcr.io/santiagomezac/heart-api:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 20

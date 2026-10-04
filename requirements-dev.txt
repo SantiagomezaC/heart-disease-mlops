@@ -1,0 +1,19 @@
+# Entorno de desarrollo y ejecución de los cuadernos (Python 3.10)
+scikit-learn==1.6.1
+pandas==2.2.3
+numpy==1.26.4
+joblib==1.4.2
+xgboost==3.0.5
+scipy==1.15.3
+matplotlib==3.9.4
+seaborn==0.13.2
+evidently==0.6.7
+fastapi==0.115.6
+uvicorn==0.34.0
+pydantic==2.10.4
+httpx==0.28.1
+pytest==8.3.4
+flake8==7.1.1
+jupyter
+nbconvert
+ipykernel

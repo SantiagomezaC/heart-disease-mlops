@@ -1,0 +1,13 @@
+.git
+.github
+.venv
+**/__pycache__
+**/.ipynb_checkpoints
+data
+notebooks
+reports
+monitoring
+k8s
+tests
+*.html
+model.joblib

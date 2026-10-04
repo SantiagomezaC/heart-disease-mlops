@@ -1,0 +1,169 @@
+{
+  "train_vs_test": {
+    "dataset_drift": false,
+    "drift_share_threshold": 0.5,
+    "number_of_columns": 12,
+    "number_of_drifted_columns": 1,
+    "share_of_drifted_columns": 0.0833,
+    "columns": {
+      "prediction": {
+        "stattest": "Z-test p_value",
+        "drift_score": 0.786457,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "Age": {
+        "stattest": "K-S p_value",
+        "drift_score": 0.072136,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "Cholesterol": {
+        "stattest": "K-S p_value",
+        "drift_score": 0.017362,
+        "threshold": 0.05,
+        "drift_detected": true
+      },
+      "MaxHR": {
+        "stattest": "K-S p_value",
+        "drift_score": 0.608245,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "Oldpeak": {
+        "stattest": "K-S p_value",
+        "drift_score": 0.322876,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "RestingBP": {
+        "stattest": "K-S p_value",
+        "drift_score": 0.538815,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "Sex": {
+        "stattest": "Z-test p_value",
+        "drift_score": 0.889914,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "ChestPainType": {
+        "stattest": "chi-square p_value",
+        "drift_score": 0.198885,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "FastingBS": {
+        "stattest": "Z-test p_value",
+        "drift_score": 0.544656,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "RestingECG": {
+        "stattest": "chi-square p_value",
+        "drift_score": 0.517262,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "ExerciseAngina": {
+        "stattest": "Z-test p_value",
+        "drift_score": 0.572223,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "ST_Slope": {
+        "stattest": "chi-square p_value",
+        "drift_score": 0.314917,
+        "threshold": 0.05,
+        "drift_detected": false
+      }
+    }
+  },
+  "train_vs_simulated_production": {
+    "dataset_drift": true,
+    "drift_share_threshold": 0.5,
+    "number_of_columns": 12,
+    "number_of_drifted_columns": 6,
+    "share_of_drifted_columns": 0.5,
+    "columns": {
+      "prediction": {
+        "stattest": "Z-test p_value",
+        "drift_score": 0.957077,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "Age": {
+        "stattest": "K-S p_value",
+        "drift_score": 0.0,
+        "threshold": 0.05,
+        "drift_detected": true
+      },
+      "Cholesterol": {
+        "stattest": "K-S p_value",
+        "drift_score": 0.0,
+        "threshold": 0.05,
+        "drift_detected": true
+      },
+      "MaxHR": {
+        "stattest": "K-S p_value",
+        "drift_score": 0.0,
+        "threshold": 0.05,
+        "drift_detected": true
+      },
+      "Oldpeak": {
+        "stattest": "K-S p_value",
+        "drift_score": 0.768897,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "RestingBP": {
+        "stattest": "K-S p_value",
+        "drift_score": 0.070277,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "Sex": {
+        "stattest": "Z-test p_value",
+        "drift_score": 0.061268,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "ChestPainType": {
+        "stattest": "chi-square p_value",
+        "drift_score": 0.023909,
+        "threshold": 0.05,
+        "drift_detected": true
+      },
+      "FastingBS": {
+        "stattest": "Z-test p_value",
+        "drift_score": 0.305128,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "RestingECG": {
+        "stattest": "chi-square p_value",
+        "drift_score": 0.67841,
+        "threshold": 0.05,
+        "drift_detected": false
+      },
+      "ExerciseAngina": {
+        "stattest": "Z-test p_value",
+        "drift_score": 0.035223,
+        "threshold": 0.05,
+        "drift_detected": true
+      },
+      "ST_Slope": {
+        "stattest": "chi-square p_value",
+        "drift_score": 0.001476,
+        "threshold": 0.05,
+        "drift_detected": true
+      }
+    }
+  },
+  "positive_rate": {
+    "reference": 0.5708,
+    "current": 0.5598,
+    "simulated_production": 0.5725
+  }
+}

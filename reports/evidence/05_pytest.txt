@@ -1,0 +1,29 @@
+============================= test session starts =============================
+platform win32 -- Python 3.10.21, pytest-8.3.4, pluggy-1.6.0 -- C:\Users\User\miniconda3\envs\heart-mlops\python.exe
+rootdir: C:\Users\User\Desktop\GEOLOGÍA\MAESTRÍA\Semestre 2\MachineLearning\heart-disease-mlops
+configfile: pytest.ini
+plugins: anyio-4.15.1, Faker-40.40.0, platformdirs-4.12.3
+collecting ... collected 16 items
+
+tests/test_api.py::test_root_lists_feature_order PASSED                  [  6%]
+tests/test_api.py::test_health PASSED                                    [ 12%]
+tests/test_api.py::test_model_info_has_metrics PASSED                    [ 18%]
+tests/test_api.py::test_predict_contract[values0] PASSED                 [ 25%]
+tests/test_api.py::test_predict_contract[values1] PASSED                 [ 31%]
+tests/test_api.py::test_predict_separates_clinical_profiles PASSED       [ 37%]
+tests/test_api.py::test_both_endpoints_agree PASSED                      [ 43%]
+tests/test_api.py::test_predict_rejects_wrong_length PASSED              [ 50%]
+tests/test_api.py::test_predict_rejects_non_numeric_value PASSED         [ 56%]
+tests/test_api.py::test_patient_rejects_invalid_category PASSED          [ 62%]
+tests/test_api.py::test_predict_tolerates_unseen_category PASSED         [ 68%]
+tests/test_model.py::test_model_is_full_pipeline PASSED                  [ 75%]
+tests/test_model.py::test_model_meets_auc_threshold PASSED               [ 81%]
+tests/test_model.py::test_model_meets_accuracy_threshold PASSED          [ 87%]
+tests/test_model.py::test_metadata_matches_model PASSED                  [ 93%]
+tests/test_model.py::test_root_copy_is_identical PASSED                  [100%]
+
+============================== warnings summary ===============================
+tests/test_api.py::test_predict_tolerates_unseen_category
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 16 passed, 1 warning in 2.64s ========================
