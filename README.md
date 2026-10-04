@@ -3,7 +3,7 @@
 [![CI](https://github.com/SantiagomezaC/heart-disease-mlops/actions/workflows/ci.yml/badge.svg)](https://github.com/SantiagomezaC/heart-disease-mlops/actions/workflows/ci.yml)
 
 **Autores:** Manuel Meza · Kevin Clemente
-**Curso:** Machine Learning (maestría), Prof. Dr. Lihki Rubio. Proyecto integrador del capítulo 10, [*Pipelines*](https://lihkir.github.io/MachineLearning/chains_pipelines.html#proyecto-integrador-de-aprendizaje-automatico)
+**Curso:** Machine Learning, Maestría en Ciencias de la Tierra, Prof. Dr. Lihki Rubio. Proyecto integrador del capítulo 10, [*Pipelines*](https://lihkir.github.io/MachineLearning/chains_pipelines.html#proyecto-integrador-de-aprendizaje-automatico)
 
 - **Jupyter Book publicado:** https://santiagomezac.github.io/heart-disease-mlops/
 - **Cuaderno compilado (todos los capítulos, con salidas):** [`proyecto_heart_disease_mlops.ipynb`](proyecto_heart_disease_mlops.ipynb)

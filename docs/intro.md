@@ -4,7 +4,7 @@ subtitle: Flujo MLOps local — Pipeline y GridSearchCV, FastAPI, Docker, Kubern
 short_title: Presentación
 ---
 
-Proyecto integrador de aprendizaje automático, capítulo 10 (*Pipelines*) · Machine Learning (maestría) · Prof. Dr. Lihki Rubio
+Proyecto integrador de aprendizaje automático, capítulo 10 (*Pipelines*) · Machine Learning, Maestría en Ciencias de la Tierra · Prof. Dr. Lihki Rubio
 
 ## Resumen
 

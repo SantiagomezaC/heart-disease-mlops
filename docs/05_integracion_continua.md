@@ -5,7 +5,7 @@ short_title: III.3 GitHub Actions
 
 **Predicción de falla cardíaca con *pipelines* de aprendizaje automático** · Etapa 5 del proyecto integrador
 
-Manuel Meza · Kevin Clemente — Machine Learning (maestría), Prof. Dr. Lihki Rubio — Octubre de 2026
+Manuel Meza · Kevin Clemente — Machine Learning, Maestría en Ciencias de la Tierra, Prof. Dr. Lihki Rubio — Octubre de 2026
 
 ---
 
