@@ -1,0 +1,8 @@
+﻿> kubectl apply -f k8s/deployment.yaml
+deployment.apps/heart-model created
+> kubectl apply -f k8s/service.yaml
+service/heart-service created
+> kubectl rollout status deployment/heart-model --timeout=180s
+Waiting for deployment "heart-model" rollout to finish: 0 of 2 updated replicas are available...
+Waiting for deployment "heart-model" rollout to finish: 1 of 2 updated replicas are available...
+deployment "heart-model" successfully rolled out

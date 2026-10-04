@@ -1,0 +1,11 @@
+﻿> kubectl get deployments,pods,svc -o wide
+NAME                          READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES                                   SELECTOR
+deployment.apps/heart-model   2/2     2            2           12s   model        ghcr.io/santiagomezac/heart-api:latest   app=heart-model
+
+NAME                               READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+pod/heart-model-5bfdc96cb4-8mtl7   1/1     Running   0          12s   10.244.0.3   minikube   <none>           <none>
+pod/heart-model-5bfdc96cb4-msvqc   1/1     Running   0          12s   10.244.0.4   minikube   <none>           <none>
+
+NAME                    TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE   SELECTOR
+service/heart-service   LoadBalancer   10.111.143.225   <pending>     80:32181/TCP   12s   app=heart-model
+service/kubernetes      ClusterIP      10.96.0.1        <none>        443/TCP        44s   <none>

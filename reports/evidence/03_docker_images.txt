@@ -1,0 +1,8 @@
+> docker images heart-api
+IMAGE              ID             DISK USAGE   CONTENT SIZE   EXTRA
+heart-api:latest   018212f7310e        690MB          159MB        
+
+> docker ps --filter name=heart-api-health   (tras el periodo de arranque del HEALTHCHECK)
+CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS                   PORTS                                         NAMES
+faf8712666d1   heart-api   "uvicorn app.api:app…"   6 seconds ago   Up 6 seconds (healthy)   0.0.0.0:8001->8000/tcp, [::]:8001->8000/tcp   heart-api-health
+Estado de salud del contenedor: healthy

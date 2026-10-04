@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
   Crea el repositorio público en GitHub y publica el proyecto (dispara el CI).
 

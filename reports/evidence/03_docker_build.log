@@ -1,0 +1,115 @@
+> docker build --no-cache --progress=plain -t heart-api -f docker/Dockerfile .
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 800B 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.10-slim
+#2 DONE 1.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 160B done
+#3 DONE 0.0s
+
+#4 [1/6] FROM docker.io/library/python:3.10-slim@sha256:c1aaf3d03e14944a039a1647e0b3f6f34c6bee517bac6ff380215ee099c4e808
+#4 resolve docker.io/library/python:3.10-slim@sha256:c1aaf3d03e14944a039a1647e0b3f6f34c6bee517bac6ff380215ee099c4e808 0.0s done
+#4 DONE 0.0s
+
+#5 [2/6] WORKDIR /app
+#5 CACHED
+
+#6 [internal] load build context
+#6 transferring context: 238B done
+#6 DONE 0.0s
+
+#7 [3/6] COPY docker/requirements.txt .
+#7 DONE 0.0s
+
+#8 [4/6] RUN pip install --no-cache-dir -r requirements.txt
+#8 1.592 Collecting fastapi==0.115.6
+#8 1.702   Downloading fastapi-0.115.6-py3-none-any.whl (94 kB)
+#8 1.734      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 94.8/94.8 kB 2.9 MB/s eta 0:00:00
+#8 1.812 Collecting uvicorn==0.34.0
+#8 1.836   Downloading uvicorn-0.34.0-py3-none-any.whl (62 kB)
+#8 1.845      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 62.3/62.3 kB 9.3 MB/s eta 0:00:00
+#8 2.035 Collecting scikit-learn==1.6.1
+#8 2.059   Downloading scikit_learn-1.6.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.5 MB)
+#8 3.941      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.5/13.5 MB 6.8 MB/s eta 0:00:00
+#8 4.004 Collecting joblib==1.4.2
+#8 4.045   Downloading joblib-1.4.2-py3-none-any.whl (301 kB)
+#8 4.131      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 301.8/301.8 kB 8.1 MB/s eta 0:00:00
+#8 4.364 Collecting pydantic==2.10.4
+#8 4.390   Downloading pydantic-2.10.4-py3-none-any.whl (431 kB)
+#8 4.416      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 431.8/431.8 kB 19.6 MB/s eta 0:00:00
+#8 4.704 Collecting pandas==2.2.3
+#8 4.728   Downloading pandas-2.2.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.1 MB)
+#8 6.066      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.1/13.1 MB 9.6 MB/s eta 0:00:00
+#8 6.622 Collecting numpy==1.26.4
+#8 6.703   Downloading numpy-1.26.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (18.2 MB)
+#8 8.753      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.2/18.2 MB 8.2 MB/s eta 0:00:00
+#8 8.811 Collecting xgboost-cpu==3.0.5
+#8 8.843   Downloading xgboost_cpu-3.0.5-py3-none-manylinux_2_28_x86_64.whl (5.0 MB)
+#8 9.394      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.0/5.0 MB 9.0 MB/s eta 0:00:00
+#8 9.505 Collecting starlette<0.42.0,>=0.40.0
+#8 9.541   Downloading starlette-0.41.3-py3-none-any.whl (73 kB)
+#8 9.548      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.2/73.2 kB 16.3 MB/s eta 0:00:00
+#8 9.609 Collecting typing-extensions>=4.8.0
+#8 9.640   Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#8 9.644      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.6/45.6 kB 25.8 MB/s eta 0:00:00
+#8 9.700 Collecting click>=7.0
+#8 9.790   Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#8 9.811      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 125.3/125.3 kB 8.8 MB/s eta 0:00:00
+#8 9.847 Collecting h11>=0.8
+#8 9.868   Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+#8 9.959 Collecting threadpoolctl>=3.1.0
+#8 9.991   Downloading threadpoolctl-3.7.0-py3-none-any.whl (26 kB)
+#8 10.28 Collecting scipy>=1.6.0
+#8 10.30   Downloading scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+#8 15.63      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 37.7/37.7 MB 7.6 MB/s eta 0:00:00
+#8 17.30 Collecting pydantic-core==2.27.2
+#8 17.33   Downloading pydantic_core-2.27.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+#8 17.89      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 3.6 MB/s eta 0:00:00
+#8 17.92 Collecting annotated-types>=0.6.0
+#8 17.94   Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#8 18.09 Collecting python-dateutil>=2.8.2
+#8 18.11   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+#8 18.15      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 229.9/229.9 kB 7.1 MB/s eta 0:00:00
+#8 18.22 Collecting pytz>=2020.1
+#8 18.25   Downloading pytz-2026.5-py2.py3-none-any.whl (506 kB)
+#8 18.30      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 506.3/506.3 kB 10.4 MB/s eta 0:00:00
+#8 18.35 Collecting tzdata>=2022.7
+#8 18.38   Downloading tzdata-2026.5-py2.py3-none-any.whl (347 kB)
+#8 18.41      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 348.0/348.0 kB 12.8 MB/s eta 0:00:00
+#8 18.47 Collecting six>=1.5
+#8 18.51   Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+#8 18.61 Collecting anyio<5,>=3.4.0
+#8 18.63   Downloading anyio-4.15.1-py3-none-any.whl (132 kB)
+#8 18.74      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 132.1/132.1 kB 1.1 MB/s eta 0:00:00
+#8 18.86 Collecting exceptiongroup>=1.0.2
+#8 18.88   Downloading exceptiongroup-1.3.1-py3-none-any.whl (16 kB)
+#8 18.92 Collecting idna>=2.8
+#8 18.95   Downloading idna-3.20-py3-none-any.whl (69 kB)
+#8 18.96      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 69.6/69.6 kB 10.7 MB/s eta 0:00:00
+#8 19.17 Installing collected packages: pytz, tzdata, typing-extensions, threadpoolctl, six, numpy, joblib, idna, h11, click, annotated-types, uvicorn, scipy, python-dateutil, pydantic-core, exceptiongroup, xgboost-cpu, scikit-learn, pydantic, pandas, anyio, starlette, fastapi
+#8 29.94 Successfully installed annotated-types-0.8.0 anyio-4.15.1 click-8.5.0 exceptiongroup-1.3.1 fastapi-0.115.6 h11-0.16.0 idna-3.20 joblib-1.4.2 numpy-1.26.4 pandas-2.2.3 pydantic-2.10.4 pydantic-core-2.27.2 python-dateutil-2.9.0.post0 pytz-2026.5 scikit-learn-1.6.1 scipy-1.15.3 six-1.17.0 starlette-0.41.3 threadpoolctl-3.7.0 typing-extensions-4.16.0 tzdata-2026.5 uvicorn-0.34.0 xgboost-cpu-3.0.5
+#8 29.94 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+#8 DONE 30.4s
+
+#9 [5/6] COPY app/ ./app/
+#9 DONE 0.1s
+
+#10 [6/6] RUN useradd --create-home --uid 1000 appuser
+#10 DONE 0.2s
+
+#11 exporting to image
+#11 exporting layers
+#11 exporting layers 10.7s done
+#11 exporting manifest sha256:54cd1d759d68411d36ffdc58aa701c260a7ee81a94d9c83beaad0d05a88515f4 0.0s done
+#11 exporting config sha256:8951a59320fdabe8c571bc45f8c82647401b367c2694dd06193c842ebe94e481 0.0s done
+#11 exporting attestation manifest sha256:efb9ef790a0ed6ef7c667f866218319b20d4ecd0ee9222f8225e304d64a1af06 0.0s done
+#11 exporting manifest list sha256:018212f7310ee3864a14f0660dd67fb937666870367160031bd662fc4b075fcc 0.0s done
+#11 naming to docker.io/library/heart-api:latest done
+#11 unpacking to docker.io/library/heart-api:latest
+#11 unpacking to docker.io/library/heart-api:latest 3.4s done
+#11 DONE 14.2s

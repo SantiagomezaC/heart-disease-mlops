@@ -187,6 +187,22 @@ python monitoring/drift_report.py
 
 Genera `drift_report.html` (entrenamiento frente a prueba, como pide el enunciado), `reports/drift_report_simulated.html` (entrenamiento frente a producción simulada) y `reports/drift_summary.json`. El análisis y los lineamientos de alerta propuestos están en `notebooks/3_drift_monitoring.ipynb`.
 
+## Evidencia de ejecución local
+
+Las salidas de cada etapa ejecutada en local (Windows 11, Docker Desktop 29.8, Minikube 1.39 con Kubernetes 1.37) se conservan en [`reports/evidence/`](reports/evidence/):
+
+| Archivo | Contenido |
+|---|---|
+| `03_api_local.txt` | API servida con `uvicorn`: `/health`, `/predict` válido y rechazo de una entrada de longitud incorrecta (422) |
+| `03_docker_build.log` | Construcción completa de la imagen (`docker build --no-cache`) |
+| `03_docker_images.txt` | Imagen resultante (159 MB comprimida) y contenedor en estado `healthy` |
+| `03_docker_run.json` | Respuesta de `/health` y `/predict` desde el contenedor (`docker run -p 8000:8000 heart-api`) |
+| `04_minikube_start.log` | Arranque del clúster local |
+| `04_kubectl_apply.txt`, `04_kubectl_get.txt` | Aplicación de los manifiestos, *rollout* y estado del Deployment (2/2 réplicas), los pods y el Service |
+| `04_k8s_predict.json` | Predicción servida a través del Service (`kubectl port-forward svc/heart-service 8080:80`) |
+| `04_kubectl_scale.txt` | Escalado a 3 réplicas en ejecución |
+| `05_flake8.txt`, `05_pytest.txt` | Lint sin observaciones y 16 pruebas aprobadas |
+
 ## Decisiones técnicas y adaptaciones al enunciado
 
 | Aspecto | Enunciado | Implementación | Motivo |

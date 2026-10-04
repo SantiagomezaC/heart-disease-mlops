@@ -1,0 +1,10 @@
+﻿> kubectl scale deployment/heart-model --replicas=3
+deployment.apps/heart-model scaled
+> kubectl rollout status deployment/heart-model --timeout=180s
+Waiting for deployment "heart-model" rollout to finish: 2 of 3 updated replicas are available...
+deployment "heart-model" successfully rolled out
+> kubectl get pods -l app=heart-model -o wide
+NAME                           READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+heart-model-5bfdc96cb4-7vmfg   1/1     Running   0          11s   10.244.0.5   minikube   <none>           <none>
+heart-model-5bfdc96cb4-8mtl7   1/1     Running   0          24s   10.244.0.3   minikube   <none>           <none>
+heart-model-5bfdc96cb4-msvqc   1/1     Running   0          24s   10.244.0.4   minikube   <none>           <none>
