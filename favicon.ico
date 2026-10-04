@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Logotipo: corazón con trazo de electrocardiograma">
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#1F3A5F"/>
+  <path d="M32 50 C 14 38, 10 28, 14 21 C 18 14, 28 14, 32 22 C 36 14, 46 14, 50 21 C 54 28, 50 38, 32 50 Z" fill="#E8603C"/>
+  <path d="M10 32 L22 32 L26 25 L31 40 L36 28 L39 32 L54 32" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

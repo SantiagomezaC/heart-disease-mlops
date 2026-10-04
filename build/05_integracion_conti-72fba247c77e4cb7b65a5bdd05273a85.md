@@ -1,0 +1,51 @@
+---
+title: Parte III.3. Integración continua con GitHub Actions
+short_title: III.3 GitHub Actions
+---
+
+**Predicción de falla cardíaca con *pipelines* de aprendizaje automático** · Etapa 5 del proyecto integrador
+
+Manuel Meza · Kevin Clemente — Machine Learning (maestría), Prof. Dr. Lihki Rubio — Octubre de 2026
+
+---
+
+**Resumen.** El flujo `.github/workflows/ci.yml` se ejecuta en cada `push` y *pull request*. Además de la revisión de estilo y las pruebas que pide el enunciado, construye la imagen Docker y la prueba, la publica en GitHub Container Registry, la despliega en un clúster efímero de Kubernetes y genera los reportes de deriva de datos. La ejecución de referencia completó sus cuatro trabajos sin errores en menos de cuatro minutos.
+
+## 1. Estructura del flujo
+
+El trabajo `build` reproduce el flujo del enunciado: instala las dependencias de la imagen (`docker/requirements.txt`), ejecuta `flake8` y corre `pytest tests/`. Respecto del enunciado se introducen tres cambios. Las acciones se actualizan de `checkout@v3` y `setup-python@v4` a sus versiones vigentes, porque las originales dependen de versiones de Node.js retiradas de los *runners* de GitHub. Se instala `httpx`, que exige el `TestClient` de FastAPI. Y el lint se extiende al directorio de pruebas.
+
+Sobre ese trabajo se encadenan otros tres. `docker` construye la imagen, la ejecuta y verifica que `/predict` devuelva una probabilidad válida; en la rama `main` la publica en `ghcr.io/santiagomezac/heart-api` con las etiquetas `latest` y el identificador del *commit*, usando el `GITHUB_TOKEN` del propio flujo. `kubernetes` crea un clúster con kind, carga la imagen recién construida, aplica los manifiestos de `k8s/`, espera el *rollout* y consulta el `Service`. `drift`, que corre en paralelo, ejecuta `monitoring/drift_report.py` y publica los reportes HTML como artefactos descargables.
+
+```{mermaid}
+flowchart LR
+  P[push / pull request] --> B[build<br/>flake8 + pytest]
+  B --> D[docker<br/>build + prueba de humo<br/>+ push a GHCR]
+  D --> K[kubernetes<br/>kind + kubectl apply<br/>+ prueba del Service]
+  B --> M[drift<br/>reportes de Evidently]
+```
+
+```{literalinclude} ../.github/workflows/ci.yml
+:language: yaml
+:caption: .github/workflows/ci.yml
+```
+
+## 2. Pruebas automáticas
+
+Las 16 pruebas cubren dos dimensiones. `tests/test_api.py` verifica el contrato del servicio: la sonda de salud, el formato y el rango de la respuesta, la coherencia entre la probabilidad y la clase, que un perfil clínico de alto riesgo se clasifique como positivo y uno de bajo riesgo como negativo, la equivalencia entre los dos endpoints de predicción, el rechazo con código 422 de listas incompletas, valores no numéricos y categorías inválidas, y la tolerancia a categorías no vistas durante el entrenamiento. `tests/test_model.py` actúa como compuerta de calidad del modelo: exige un AUC de prueba de al menos 0.90 y una exactitud de al menos 0.85, comprueba que el artefacto sea el pipeline completo con las variables en el orden esperado y que los metadatos y la copia en la raíz sean consistentes. Si un reentrenamiento futuro degradara el modelo por debajo de esos umbrales, el flujo fallaría y la imagen no se publicaría.
+
+```{literalinclude} ../reports/evidence/05_pytest.txt
+:language: text
+:caption: Ejecución local de las pruebas
+```
+
+## 3. Resultado de la ejecución
+
+| Trabajo | Resultado | Duración |
+|---|---|---|
+| `build` (lint y pruebas) | Exitoso | 29 s |
+| `docker` (imagen, prueba de humo y publicación) | Exitoso | 79 s |
+| `kubernetes` (despliegue en kind) | Exitoso | 79 s |
+| `drift` (reportes de Evidently) | Exitoso | 53 s |
+
+El historial completo de ejecuciones puede consultarse en la pestaña [Actions](https://github.com/SantiagomezaC/heart-disease-mlops/actions) del repositorio, y la imagen publicada en [`ghcr.io/santiagomezac/heart-api`](https://github.com/SantiagomezaC/heart-disease-mlops/pkgs/container/heart-api), desde donde puede descargarse con `docker pull ghcr.io/santiagomezac/heart-api:latest`.
