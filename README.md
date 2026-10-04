@@ -57,7 +57,8 @@ heart-disease-mlops/
 │   ├── figures/                    # figuras de los cuadernos
 │   ├── evidence/                   # salidas de lint, pruebas, API, Docker y Kubernetes
 │   ├── drift_report_simulated.html
-│   └── drift_summary.json
+│   ├── drift_summary.json
+│   └── html/                       # cuadernos exportados a HTML para lectura directa
 ├── scripts/
 │   ├── deploy_local.ps1            # Etapas 3 y 4 en un solo paso (Docker + Minikube)
 │   └── publish_github.ps1
