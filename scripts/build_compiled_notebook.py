@@ -10,6 +10,7 @@ Uso (desde la raíz del repositorio):
     python scripts/build_compiled_notebook.py
 """
 
+import base64
 import re
 from pathlib import Path
 
@@ -41,14 +42,21 @@ def md_to_cells(path: Path) -> list:
             caption = opts.get("caption", src.name)
             return f"*{caption}*\n\n```{lang}\n{code}\n```"
         if kind == "figure":
-            rel = (base / arg).resolve().relative_to(ROOT).as_posix()
-            return f"![{rest}]({rel})\n\n*{rest}*"
+            # La imagen se incrusta como adjunto para que el cuaderno sea autocontenido.
+            src = (base / arg).resolve()
+            attachments[src.name] = {
+                "image/png": base64.b64encode(src.read_bytes()).decode()}
+            return f"![{rest}](attachment:{src.name})\n\n*{rest}*"
         return f"```{kind}\n{rest}\n```"
 
+    attachments = {}
     text = FENCE.sub(repl, text).strip()
     if title:
         text = f"# {title}\n\n{text}"
-    return [nbformat.v4.new_markdown_cell(text)]
+    cell = nbformat.v4.new_markdown_cell(text)
+    if attachments:
+        cell["attachments"] = attachments
+    return [cell]
 
 
 def main():
