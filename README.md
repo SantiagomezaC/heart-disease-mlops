@@ -5,6 +5,9 @@
 **Autores:** Manuel Meza · Kevin Clemente
 **Curso:** Machine Learning (maestría), Prof. Dr. Lihki Rubio. Proyecto integrador del capítulo 10, [*Pipelines*](https://lihkir.github.io/MachineLearning/chains_pipelines.html#proyecto-integrador-de-aprendizaje-automatico)
 
+- **Jupyter Book publicado:** https://santiagomezac.github.io/heart-disease-mlops/
+- **Cuaderno compilado (todos los capítulos, con salidas):** [`proyecto_heart_disease_mlops.ipynb`](proyecto_heart_disease_mlops.ipynb)
+
 ---
 
 ## Resumen
@@ -59,16 +62,20 @@ heart-disease-mlops/
 │   ├── drift_report_simulated.html
 │   ├── drift_summary.json
 │   └── html/                       # cuadernos exportados a HTML para lectura directa
+├── docs/                           # páginas del libro: presentación, Etapas 3–5 y conclusiones
 ├── scripts/
 │   ├── deploy_local.ps1            # Etapas 3 y 4 en un solo paso (Docker + Minikube)
+│   ├── build_compiled_notebook.py  # genera el cuaderno compilado
 │   └── publish_github.ps1
 ├── drift_report.html               # reporte de deriva entrenamiento vs. prueba
 ├── model.joblib                    # copia del modelo en la raíz (estructura de la Etapa 0)
+├── myst.yml                        # configuración e índice del Jupyter Book (MyST)
+├── proyecto_heart_disease_mlops.ipynb  # cuaderno compilado de todo el proyecto
 ├── requirements-dev.txt            # entorno de desarrollo (cuadernos)
 └── README.md
 ```
 
-La estructura reproduce la propuesta de la Etapa 0. Se añadieron `tests/` (exigida por el `pytest tests/` del workflow del enunciado), `monitoring/`, `data/`, `reports/` y `scripts/` para separar el monitoreo, los datos, los resultados y la automatización.
+La estructura reproduce la propuesta de la Etapa 0. Se añadieron `tests/` (exigida por el `pytest tests/` del workflow del enunciado), `monitoring/`, `data/`, `reports/`, `docs/` y `scripts/` para separar el monitoreo, los datos, los resultados, el libro y la automatización.
 
 ## Resultados principales
 
@@ -186,6 +193,17 @@ python monitoring/drift_report.py
 ```
 
 Genera `drift_report.html` (entrenamiento frente a prueba, como pide el enunciado), `reports/drift_report_simulated.html` (entrenamiento frente a producción simulada) y `reports/drift_summary.json`. El análisis y los lineamientos de alerta propuestos están en `notebooks/3_drift_monitoring.ipynb`.
+
+### 8. Jupyter Book y cuaderno compilado
+
+El libro se construye con [MyST](https://mystmd.org) a partir de `myst.yml`, que ordena los tres cuadernos y las páginas de `docs/`:
+
+```powershell
+$env:BASE_URL = "/heart-disease-mlops"
+myst build --html                          # sitio estático en _build/html
+ghp-import -n -p -f _build/html            # publicación en la rama gh-pages
+python scripts/build_compiled_notebook.py  # cuaderno compilado único
+```
 
 ## Evidencia de ejecución local
 

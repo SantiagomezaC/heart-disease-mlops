@@ -7802,11 +7802,8 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<div align="center">
-<h1 id="Predicci%C3%B3n-de-falla-card%C3%ADaca-con-pipelines-de-aprendizaje-autom%C3%A1tico">Predicción de falla cardíaca con <em>pipelines</em> de aprendizaje automático<a class="anchor-link" href="#Predicci%C3%B3n-de-falla-card%C3%ADaca-con-pipelines-de-aprendizaje-autom%C3%A1tico">¶</a></h1><h2 id="Parte-III.-Monitoreo-de-deriva-de-datos-con-Evidently">Parte III. Monitoreo de deriva de datos con Evidently<a class="anchor-link" href="#Parte-III.-Monitoreo-de-deriva-de-datos-con-Evidently">¶</a></h2><p><strong>Manuel Meza · Kevin Clemente</strong></p>
-<p>Maestría — Machine Learning · Profesor: Dr. Lihki Rubio</p>
-<p>Proyecto integrador, capítulo 10 (<em>Pipelines</em>) · Octubre de 2026</p>
-</div>
+<h1 id="Parte-IV.-Monitoreo-de-deriva-de-datos-con-Evidently">Parte IV. Monitoreo de deriva de datos con Evidently<a class="anchor-link" href="#Parte-IV.-Monitoreo-de-deriva-de-datos-con-Evidently">¶</a></h1><p><strong>Predicción de falla cardíaca con <em>pipelines</em> de aprendizaje automático</strong> · Etapa 6 del proyecto integrador</p>
+<p>Manuel Meza · Kevin Clemente — Machine Learning (maestría), Prof. Dr. Lihki Rubio — Octubre de 2026</p>
 <hr/>
 <p><strong>Resumen.</strong> Este cuaderno documenta la Etapa 6 del proyecto. Con <code>Report(metrics=[DataDriftPreset()])</code> de Evidently se compara la distribución de las variables de entrada y de las predicciones entre el conjunto de entrenamiento (referencia) y dos conjuntos actuales: el de prueba, que proviene de la misma población, y un lote de producción simulado con cambios demográficos y de laboratorio plausibles. Entre entrenamiento y prueba no se detecta deriva del conjunto (1 de 12 columnas, atribuible a comparaciones múltiples); en el lote simulado se detecta deriva en 6 de 12 columnas, incluidas las cuatro perturbadas deliberadamente. El análisis muestra además que la deriva de las entradas no se tradujo en deriva de las predicciones, lo que obliga a distinguir entre ambos fenómenos al definir alertas.</p>
 </div>

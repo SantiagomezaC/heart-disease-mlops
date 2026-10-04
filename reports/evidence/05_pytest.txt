@@ -1,6 +1,6 @@
 ============================= test session starts =============================
 platform win32 -- Python 3.10.21, pytest-8.3.4, pluggy-1.6.0 -- C:\Users\User\miniconda3\envs\heart-mlops\python.exe
-rootdir: C:\Users\User\Desktop\GEOLOGÕA\MAESTRÕA\Semestre 2\MachineLearning\heart-disease-mlops
+rootdir: C:\Users\User\Desktop\GEOLOG√çA\MAESTR√çA\Semestre 2\MachineLearning\heart-disease-mlops
 configfile: pytest.ini
 plugins: anyio-4.15.1, Faker-40.40.0, platformdirs-4.12.3
 collecting ... collected 16 items

@@ -1,0 +1,43 @@
+version: 1
+project:
+  title: Predicción de falla cardíaca con pipelines de aprendizaje automático
+  subtitle: Proyecto integrador de aprendizaje automático — flujo MLOps local
+  description: >-
+    Clasificación del riesgo de enfermedad cardíaca con Pipeline y GridSearchCV, demostración de la fuga
+    de datos, comparación de nueve clasificadores y despliegue con FastAPI, Docker, Kubernetes,
+    GitHub Actions y monitoreo de deriva con Evidently.
+  keywords:
+    - aprendizaje automático
+    - pipelines
+    - fuga de datos
+    - MLOps
+    - FastAPI
+    - Kubernetes
+    - Evidently
+  authors:
+    - name: Manuel Meza
+    - name: Kevin Clemente
+  github: https://github.com/SantiagomezaC/heart-disease-mlops
+  exclude:
+    - README.md
+    - _build/**
+    - data/**
+    - reports/html/**
+  toc:
+    - file: docs/intro.md
+    - file: notebooks/1_model_leakage_demo.ipynb
+    - file: notebooks/2_model_pipeline_cv.ipynb
+    - file: docs/03_despliegue_api_docker.md
+    - file: docs/04_kubernetes.md
+    - file: docs/05_integracion_continua.md
+    - file: notebooks/3_drift_monitoring.ipynb
+    - file: docs/conclusiones.md
+
+site:
+  template: book-theme
+  title: Falla cardíaca · Pipelines y MLOps
+  options:
+    logo: docs/images/logo.svg
+    logo_dark: docs/images/logo-dark.svg
+    logo_text: Falla cardíaca · ML
+    favicon: docs/images/logo.svg
