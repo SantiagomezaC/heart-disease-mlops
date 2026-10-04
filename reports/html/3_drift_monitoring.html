@@ -7985,6 +7985,18 @@ a.anchor-link {
 </div>
 </div>
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6660fb48">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>Tabla 1.</strong> Resultado de la deriva a nivel de conjunto en los dos escenarios.</p>
+<p>La regla de nivel de conjunto de Evidently separa con claridad ambos escenarios. Entre entrenamiento y prueba solo 1 de las 12 columnas evaluadas (las 11 variables de entrada y la predicción) presenta deriva, una proporción de 8.3 % muy inferior al umbral de 50 %, de modo que el conjunto se considera estable, como corresponde a dos particiones aleatorias de la misma muestra. En el lote de producción simulado la deriva alcanza 6 de 12 columnas, exactamente el umbral, y el conjunto se declara con deriva. Que el resultado quede justo en el límite advierte que la regla de proporción, por sí sola, puede ser poco sensible cuando el cambio afecta a un subconjunto de variables; la sección siguiente examina qué columnas la provocan y con qué intensidad.</p>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c57234e6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -8017,7 +8029,7 @@ a.anchor-link {
 <span class="n">bonferroni</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">orden</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Umbral con corrección de Bonferroni para </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">orden</span><span class="p">)</span><span class="si">}</span><span class="s2"> pruebas: </span><span class="si">{</span><span class="n">bonferroni</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="n">tabla</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s2">"</span><span class="si">{:.4f}</span><span class="s2">"</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">tabla</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"p-valor"</span><span class="p">])</span><span class="o">.</span><span class="n">set_caption</span><span class="p">(</span>
-    <span class="s2">"Tabla 1. p-valores de las pruebas de deriva por columna"</span><span class="p">)</span>
+    <span class="s2">"Tabla 2. p-valores de las pruebas de deriva por columna"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8040,7 +8052,7 @@ a.anchor-link {
 <style type="text/css">
 </style>
 <table id="T_ec0a3">
-<caption>Tabla 1. p-valores de las pruebas de deriva por columna</caption>
+<caption>Tabla 2. p-valores de las pruebas de deriva por columna</caption>
 <thead>
 <tr>
 <th class="blank"> </th>
